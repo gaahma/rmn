@@ -1,0 +1,56 @@
+The idea here is to create a bank account simulator where we give a starting balance, a starting date, a
+timeframe and a set of rules that mock bank transactions.
+
+Brainstorming some potential classes 
+    Calendar 
+        - Performs calendar functions like... 
+            - get next or previous business Day
+            - keep track of holidays
+        - The parent of the Day objects 
+            - Stores Days in hash?  {date_string => date_obj}
+                - a Day doesn't exist until you ask for it?
+            - Or array?
+            - Linked List of Days?
+
+            
+    Rule
+        - On days                                   [Fri] or [Mon, Wed, Fri]
+        - On dates                                  [1] or [15, 30]
+            - Need some way to denote end 
+              of the month, thinking [30]
+        - On exact calendar dates                    ["Mon Sep 24, 2018", "Fri Oct 31, 2018"] 
+        - Every n unit
+            * Needs an effective start date 
+            - Every 2 Fridays
+            - Every 6 months
+            - Once a year
+            - etc..      
+
+    Day
+        - This will probably be a struct
+        - Maybe a linked list node?
+        - Intrigued by the idea of a quasi linked list
+            - Day objects stored in hash where {date_string => date_obj}
+            - Each Day has the keys to it's neighbor, rather than references
+        - Needs a moment.js friendly timestamp 
+        - Otherwise uses moment.js to create a struct with properties...
+        - Constructor(epoch)
+            - name
+            - date
+            - month
+            - year
+            - is_business_day
+            - next => epoch + 1 day formatted
+            - prev => epoch - 1 day formatted
+            - epoch
+
+    Account
+        - parent of rules
+        - parent of transaction log 
+            - array or hash?
+        - should do the actual calculations
+
+    Transaction?
+        * Not sure if I really need a class here.  Maybe... might use structs.  
+
+
