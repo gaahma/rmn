@@ -80,11 +80,11 @@ class Day {
                     return true;
                 break;
             case 'Dec':
-                if(this.date === '24')                       //Christmas Eve
+                if(this.date === 24)                       //Christmas Eve
                     return true;
-                if(this.date === '25')                       //Christmas
+                if(this.date === 25)                       //Christmas
                     return true;
-                if(this.date === '31')                       //New Years Eve
+                if(this.date === 31)                       //New Years Eve
                     return true;
                 break;
             default:

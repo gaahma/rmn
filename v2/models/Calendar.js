@@ -5,7 +5,7 @@ class Calendar {
         this.dates = {};
     }
 
-    get_date(epoch){
+    get(epoch){
         if(this.dates[epoch]) 
             return this.dates[epoch];
 
