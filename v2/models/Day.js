@@ -4,28 +4,22 @@ class Day {
     constructor(epoch){
         const [name, month, date, year] = moment(epoch).format('ddd ll').replace(/,/g, '').split(' ');
 
-        if (!name || !month || !date || !year){
+        if (!name || !month || !date || !year)
             throw new Error(`Cannot parse date: "${epoch}"`);
-        }
-
-        this.name = name;
+        
+        this.epoch = epoch;
+        this.name = name; //weekname eg 'Mon' 'Tue'...
         this.month = month;
         this.date = parseInt(date);
-        this.year = year;
-        this.epoch = epoch;
-        this.next = moment(epoch).add(1, 'day').format('YYYY-MM-DD');
-        this.prev = moment(epoch).subtract(1, 'day').format('YYYY-MM-DD');
+        this.year = parseInt(year);
+        this.eom = this.is_end_of_month() ? this.month : null;
         this.is_bus_day = this.bus_day();
     }
 
-        /*******************************************************************
+    /*******************************************************************
      * Method: bus_day
      * 
      * Check if this day is a business day.  
-     * 
-     * usage:
-     *  
-     *      this.bus_day();
      * 
      * Returns: Bool
      */   
@@ -38,12 +32,6 @@ class Day {
      * 
      * Check if this day is a holiday.  Excludes Easter, which always
      * falls on a Sunday, so I don't need to account for it.
-     * 
-     * usage:
-     * 
-     *      Is today a holiday?
-     *  
-     *      this.is_holiday();
      * 
      * Returns: Bool
      */  
@@ -60,7 +48,7 @@ class Day {
                     return true;
                 break;
             case 'May':
-                if(this.is_last_of_month('Mon'))    //Memorial Day
+                if(this.is_last_of_month('Mon'))            //Memorial Day
                     return true;
                 break;
             case 'Jul':
@@ -98,8 +86,8 @@ class Day {
      * Check if this day is the nth day of it's name.
      * 
      * params: 
-     *      @param {Integer} n      - 1 - 5
-     *      @param {String} day     - 'Mon', 'Tue', etc..
+     *      @param {Integer} n 1 ... 5
+     *      @param {String} day 'Mon', 'Tue', etc..
      * 
      * usage: 
      *      Is this day the second Monday of the month?
@@ -109,29 +97,26 @@ class Day {
      * Returns: Bool
      */
     is_nth_day_of_month(n, name){
-        if(this.name !== name) 
+        if (this.name !== name) 
             return false;
 
-        let month;
         let count = 0;
+        let month;
 
-        do{
+        do {
             month = moment(this.epoch).subtract(++count, 'week').format('MMM');
         } while (month === this.month);
 
-        if (n === count)
-            return true;
-        
-        return false;
+        return (n === count);
     }
     /*******************************************************************
      * Method: is_last_of_month
      * 
-     * Check if current day is the last of it's kind
-     * in the current month.
+     * Check if this day is the last of it's name
+     * in it's month.
      * 
      * params:
-     *      @param {String} day     - 'Mon', 'Tue', etc...
+     *      @param {String} day 'Mon', 'Tue', etc...
      *   
      * usage:
      *      Is this day the last Wednesday of the month?
@@ -143,11 +128,44 @@ class Day {
     is_last_of_month(day){
         if(this.day !== day) 
             return false;  
-        //if 1 week from today is a different month, this is the last of that day 
-        if(this.month !== moment(this.full_date).add(1, 'week').format('MMM'))
-            return true;
 
-        return false; 
+        return (this.month !== moment(this.epoch).add(1, 'week').format('MMM'));
+    }
+
+    /*******************************************************************
+     * Method: is_end_of_month
+     * 
+     * Check if this day is the last day of the month
+     * 
+     * Returns: Bool
+     */
+    is_end_of_month(){
+        if(this.date < 28)
+            return false;
+
+        const month = moment(this.epoch).add(1, 'd').format('MMM');
+
+        return (this.month !== month);
+    }
+
+    get_adjacent(direction){
+        if(direction === 'prev'){
+            return this.prev();
+        } else {
+            return this.next();
+        }
+    }
+
+    next(){
+        if(this.next_epoch)
+            return this.next_epoch;
+        return this.next_epoch = moment(this.epoch).add(1, 'd').format('YYYY-MM-DD');
+    }
+
+    prev(){
+        if(this.prev_epoch)
+            return this.prev_epoch;
+        return this.prev_epoch = moment(this.epoch).subtract(1, 'd').format('YYYY-MM-DD');
     }
 }
 
