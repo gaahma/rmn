@@ -7,10 +7,9 @@ Brainstorming some potential classes
             - get next or previous business Day
             - keep track of holidays
         - The parent of the Day objects 
-            - Stores Days in hash?  {date_string => date_obj}
+            - Stores Days in hash  {date_string => date_obj}
                 - a Day doesn't exist until you ask for it?
-            - Or array?
-            - Linked List of Days?
+            - Linked List of Days
 
             
     Rule
@@ -27,8 +26,6 @@ Brainstorming some potential classes
             - etc..      
 
     Day
-        - This will probably be a struct
-        - Maybe a linked list node?
         - Intrigued by the idea of a quasi linked list
             - Day objects stored in hash where {date_string => date_obj}
             - Each Day has the keys to it's neighbor, rather than references
@@ -49,8 +46,6 @@ Brainstorming some potential classes
         - parent of transaction log 
             - array or hash?
         - should do the actual calculations
-
-    Transaction?
-        * Not sure if I really need a class here.  Maybe... might use structs.  
+  
 
 

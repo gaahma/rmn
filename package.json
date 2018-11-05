@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "performance": "^1.1.1",
+    "performance-now": "^2.1.0"
   }
 }
