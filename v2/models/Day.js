@@ -12,19 +12,19 @@ class Day {
         this.month = month;
         this.date = parseInt(date);
         this.year = parseInt(year);
-        this.eom = this.is_end_of_month() ? this.month : null;
-        this.is_bus_day = this.bus_day();
     }
 
     /*******************************************************************
-     * Method: bus_day
+     * Method: is_bus_day
      * 
      * Check if this day is a business day.  
      * 
      * Returns: Bool
      */   
-    bus_day(){
-        return  (this.name !== 'Sat' && this.name !== 'Sun' && !this.is_holiday());
+    is_bus_day(){
+        if(this.hasOwnProperty('bus_day'))
+            return this.bus_day;
+        return this.bus_day = (this.name !== 'Sat' && this.name !== 'Sun' && !this.is_holiday());
     }
     
     /*******************************************************************
@@ -146,6 +146,19 @@ class Day {
         const month = moment(this.epoch).add(1, 'd').format('MMM');
 
         return (this.month !== month);
+    }
+
+    property(prop){
+        if(this.hasOwnProperty(prop))
+            return this[prop];
+
+        if(prop === 'eom'){
+            return this.eom = this.is_end_of_month() ? this.month : null;
+        }
+        if(prop === 'annual'){
+            return this.epoch.replace(/[0-9]{4}-/g, "");
+        }
+
     }
 
     get_adjacent(direction){

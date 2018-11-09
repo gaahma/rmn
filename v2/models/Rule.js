@@ -1,12 +1,13 @@
 class Rule {
-    constructor(type, flags, require_bus_day){
+    constructor(type, flags, bus_day_direction, details){
         this.type = type;
         this.flags = flags;
-        this.require_bus_day = require_bus_day; //prev, next, or null
+        this.bus_day_direction = bus_day_direction; //prev, next, or null
+        this.details = details;
     }
 
     matches(date){
-        return this.flags.includes(date[this.type]);
+        return this.flags.includes(date.property(this.type));
     }
 
 }

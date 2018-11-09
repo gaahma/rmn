@@ -5,18 +5,19 @@ class Calendar {
         this.dates = {};
     }
 
-    get_date(epoch){
+    get(epoch){
         if(this.dates[epoch]) 
             return this.dates[epoch];
 
         return this.dates[epoch] = new Day(epoch);
     }
 
-    get_applicable_date(day, bus_day_direction){
-        if(!day.is_bus_day && bus_day_direction){
+    get_applicable_date(day, rule){
+        const direction = rule.bus_day_direction; //prev, next, or null
+        if(!day.is_bus_day() && direction){
             do {
-                day = this.get_date(day.get_adjacent(bus_day_direction));
-            } while(!day.is_bus_day);
+                day = this.get(day.get_adjacent(direction));
+            } while(!day.is_bus_day());
         }
 
         return day.epoch;

@@ -1,6 +1,6 @@
 class Account {
-    constructor(starting_date, time_in_days, starting_bal, rules){
-
+    constructor(starting_bal, rules){
+        
     }
 }
 
