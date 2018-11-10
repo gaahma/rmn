@@ -1,11 +1,15 @@
 class Rule {
-    constructor(type, options, amt, name, bus_day){
+    constructor(type, flags, bus_day_direction, details){
         this.type = type;
-        this.options = options;
-        this.amt = amt;
-        this.name = name;
-        this.bus_day = bus_day;
+        this.flags = flags;
+        this.bus_day_direction = bus_day_direction; //prev, next, or null
+        this.details = details;
     }
+
+    matches(date){
+        return this.flags.includes(date.property(this.type));
+    }
+
 }
 
 module.exports = Rule;
