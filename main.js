@@ -1,20 +1,19 @@
-const Day = require('./models/Day');
-const Rule = require('./models/Rule');
-const SecondaryRule = require('./models/SecondaryRule');
+// const Day = require('./models/Day');
+// const Rule = require('./models/Rule');
+const Rule_Set = require('./models/Rule_Set');
 const Calendar = require('./models/Calendar');
 const moment = require('moment');
 
+const rule = new Rule_Set({
+    id_rules: [
+        {type: 'simple', prop: 'date', flags: [15]},
+        {type: 'simple', prop: 'month', flags: ['Sep', 'Mar']}
+    ]
+});
 
-const calendar = new Calendar();
-const date = calendar.get('2018-11-24');
 
 
 
-const rule = new SecondaryRule('week', 2, '2018-11-09');
-
-
-const bool = rule.matches(date);
-console.log(bool);
 // const account = {
 //     starting_balance: 400,
 //     rules: [

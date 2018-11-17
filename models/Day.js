@@ -2,13 +2,13 @@ const moment = require('moment');
 
 class Day {
     constructor(epoch){
-        const [name, month, date, year] = moment(epoch).format('ddd ll').replace(/,/g, '').split(' ');
+        const [day, month, date, year] = moment(epoch).format('ddd ll').replace(/,/g, '').split(' ');
 
-        if (!name || !month || !date || !year)
+        if (!day || !month || !date || !year)
             throw new Error(`Cannot parse date: "${epoch}"`);
         
         this.epoch = epoch;
-        this.name = name; //weekname eg 'Mon' 'Tue'...
+        this.day = day; //weekday eg 'Mon' 'Tue'...
         this.month = month;
         this.date = parseInt(date);
         this.year = parseInt(year);
@@ -24,7 +24,7 @@ class Day {
     is_bus_day(){
         if(this.hasOwnProperty('bus_day'))
             return this.bus_day;
-        return this.bus_day = (this.name !== 'Sat' && this.name !== 'Sun' && !this.is_holiday());
+        return this.bus_day = (this.day !== 'Sat' && this.day !== 'Sun' && !this.is_holiday());
     }
     
     /*******************************************************************
@@ -96,8 +96,8 @@ class Day {
      * 
      * Returns: Bool
      */
-    is_nth_day_of_month(n, name){
-        if (this.name !== name) 
+    is_nth_day_of_month(n, day){
+        if (this.day !== day) 
             return false;
 
         let count = 0;
@@ -153,7 +153,7 @@ class Day {
             return this[prop];
 
         if(prop === 'eom'){
-            return this.eom = this.is_end_of_month() ? this.month : null;
+            return this.eom = this.is_end_of_month();
         }
         if(prop === 'annual'){
             return this.epoch.replace(/[0-9]{4}-/g, "");
