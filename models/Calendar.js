@@ -6,7 +6,7 @@ class Calendar {
     }
 
     get(epoch){
-        if(this.dates[epoch]) 
+        if(this.hasOwnProperty(epoch)) 
             return this.dates[epoch];
 
         return this.dates[epoch] = new Day(epoch);
