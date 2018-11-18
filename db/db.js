@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 class FileHandler {
-    post(file_name, obj){
+    save(file_name, obj){
         let json;
         try{
             json = JSON.stringify(obj,null,4);
@@ -17,11 +17,7 @@ class FileHandler {
     }
 
     get(file_name){
-        fs.readFileSync(`./db/${file_name}`, (file, err) => {
-            console.log(file, err);
-            if(err)
-                throw Error(err);
-        })
+        return JSON.parse(fs.readFileSync(`./db/${file_name}`, 'utf8'));
     }
 }
 
