@@ -9,16 +9,21 @@ const rule = new Rule_Set({
     transaction: {name: "Spotify", value: -11},
 
     identification_rules: [
-        {type: 'simple', prop: 'eom', flags: [true]},
-        // {type: 'simple', prop: 'month', flags: ['Nov', 'Oct']},
-        // {type: 'interval', interval: 2, unit: 'weeks', start_date: '2018-11-03'}
+        {type: 'simple', prop: 'day', flags: ['Sat']},
+        {type: 'simple', prop: 'month', flags: ['Nov']},
     ],
+    application_rules: {
+        require_business_day: true,
+        business_day_direction: 'prev'
+    }
 
 });
 
-const day = calendar.get('2018-11-17');
+const day = calendar.get('2018-11-23');
 
-console.log(rule.matches(day));
+// console.log(rule.matches(day));
+
+console.log(day.is_bus_day());
 
 
 
