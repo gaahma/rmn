@@ -1,0 +1,45 @@
+[
+    {
+        "transaction": {
+            "name": "Apex",
+            "value": 954
+        },
+        "identification_rules": [
+            {
+                "type": "simple",
+                "prop": "day",
+                "flags": [
+                    "Fri"
+                ]
+            }
+        ],
+        "application_rules": {
+            "bd_direction": "prev"
+        }
+    },
+    {
+        "transaction": {
+            "name": "Spotify",
+            "value": -11
+        },
+        "identification_rules": [
+            {
+                "type": "simple",
+                "prop": "day",
+                "flags": [
+                    "Sat"
+                ]
+            },
+            {
+                "type": "simple",
+                "prop": "month",
+                "flags": [
+                    "Nov"
+                ]
+            }
+        ],
+        "application_rules": {
+            "bd_direction": "next"
+        }
+    }
+]

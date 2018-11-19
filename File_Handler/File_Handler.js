@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-class FileHandler {
+class File_Handler {
     save(file_name, obj){
         let json;
         try{
@@ -9,7 +9,7 @@ class FileHandler {
             throw e;
         }
         
-        fs.writeFileSync(`./db/${file_name}`, json, function(err) {
+        fs.writeFileSync(`./File_Handler/${file_name}`, json, function(err) {
             if(err) {
                 throw err;
             }
@@ -17,8 +17,8 @@ class FileHandler {
     }
 
     get(file_name){
-        return JSON.parse(fs.readFileSync(`./db/${file_name}`, 'utf8'));
+        return JSON.parse(fs.readFileSync(`./File_Handler/${file_name}`));
     }
 }
 
-module.exports = FileHandler;
+module.exports = File_Handler;

@@ -13,10 +13,10 @@ class Calendar {
     }
 
     get_applicable_date(day, rule){
-        const direction = rule.bus_day_direction; //prev, next, or null
-        if(!day.is_bus_day() && direction){
+        const {bd_direction} = rule.application_rules; //prev, next, or null
+        if(!day.is_bus_day() && bd_direction){
             do {
-                day = this.get(day.get_adjacent(direction));
+                day = this.get(day.get_adjacent(bd_direction));
             } while(!day.is_bus_day());
         }
 

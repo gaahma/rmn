@@ -24,7 +24,9 @@ class Day {
     is_bus_day(){
         if(this.hasOwnProperty('bus_day'))
             return this.bus_day;
-        return this.bus_day = (this.day !== 'Sat' && this.day !== 'Sun' && !this.is_holiday());
+        return this.bus_day = (
+            this.day !== 'Sat' && this.day !== 'Sun' && !this.is_holiday()
+        );
     }
     
     /*******************************************************************
