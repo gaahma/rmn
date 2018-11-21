@@ -150,14 +150,14 @@ class Day {
         return (this.month !== month);
     }
 
-    property(prop){
-        if(this.hasOwnProperty(prop))
-            return this[prop];
+    get(property){
+        if(this.hasOwnProperty(property))
+            return this[property];
 
-        if(prop === 'eom'){
+        if(property === 'eom'){
             return this.eom = this.is_end_of_month();
         }
-        if(prop === 'annual'){
+        if(property === 'annual'){
             return this.epoch.replace(/[0-9]{4}-/g, "");
         }
 

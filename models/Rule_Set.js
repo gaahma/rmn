@@ -25,9 +25,9 @@ class Rule_Set {
     }
     class_properties(){
         this.rule_funcs = {
-            //{type: 'simple', prop: 'date', flags: [17]}
+            //{type: 'simple', property: 'date', flags: [17]}
             simple: function(rule, day){
-                return rule.flags.includes(day.property(rule.prop));
+                return rule.flags.includes(day.get(rule.property));
             },
             //{type: 'interval', interval: 2, unit: 'weeks', start_date: '2018-11-03'}
             interval: function(rule, day){

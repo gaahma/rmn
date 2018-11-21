@@ -2,38 +2,31 @@ const Rule_Set = require('./models/Rule_Set');
 const Calendar = require('./models/Calendar');
 const moment = require('moment');
 const File_Handler = require('./File_Handler/File_Handler');
-
+const rule_params = require('./rule_sets/my_rules.js');
 const calendar = new Calendar();
-const fh = new File_Handler();
+// const fh = new File_Handler();
+
+const my_rules = rule_params.map(rule => new Rule_Set(rule));
+let epoch = moment().format('YYYY-MM-DD');
+
+// console.log(my_rules);
+const timeline = [epoch];
+for (let i = 0; i< 10; i++){
+    epoch = moment(epoch).add(1, 'day').format('YYYY-MM-DD');
+    timeline.push(epoch);
+}
+
+timeline.forEach(date => {
+    const day = calendar.get(date);
+    my_rules.forEach(rule => {
+        if(rule.matches(day)){
+            console.log(day.epoch);
+        }
+    })
+})
 
 
-const rule = new Rule_Set({
-    transaction: {name: "Spotify", value: -11},
 
-    identification_rules: [
-        {type: 'simple', prop: 'day', flags: ['Sat']},
-        {type: 'simple', prop: 'month', flags: ['Nov']},
-    ],
-    application_rules: {
-        bd_direction: 'next'
-    }
-
-});
-
-const whatever = fh.get('my_rules.json');
-// fh.save('my_rules.json', whatever);
-
-console.log(whatever[0].transaction);
-
-
-// const day = calendar.get('2018-11-17');
-
-// console.log(rule.matches(day));
-
-// const ad = calendar.get_applicable_date(day, rule);
-// console.log(ad);
-
-// console.log(day.is_bus_day());
 
 
 
