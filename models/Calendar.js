@@ -6,7 +6,7 @@ class Calendar {
     }
 
     get(epoch){
-        if(this.hasOwnProperty(epoch)) 
+        if(this.dates.hasOwnProperty(epoch)) 
             return this.dates[epoch];
 
         return this.dates[epoch] = new Day(epoch);
@@ -21,6 +21,16 @@ class Calendar {
         }
 
         return day.epoch;
+    }
+
+    define_timeline(starting_date, day_count){
+        const timeline = [];
+        let day = this.get(starting_date);
+        for (let i = 0; i < day_count; i++){
+            day = this.get(day.next());
+            timeline.push(day.epoch);
+        }
+        return timeline;
     }
 }
 
