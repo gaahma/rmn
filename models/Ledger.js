@@ -9,12 +9,13 @@ class Ledger {
 
     get(date){
         if(!this.pages.hasOwnProperty(date)){
-            return this.pages[date] = {
+            this.pages[date] = {
                 transactions: []
             };
-        } else {
-            return this.pages[date];
-        }
+        } 
+            
+        return this.pages[date];
+        
     }
     calculate(balance, timeline){
         timeline.forEach(date => {
@@ -29,13 +30,13 @@ class Ledger {
     }
 
     report(timeline){
-        let report = '';
+        let report = "";
         timeline.forEach(date => {
             const page = this.get(date);
             if(page.transactions.length){
-                report += `${date}\n\tStarting Balance: $${page.starting_balance}\n\n`;
+                report += `${date}\n\n`;
                 page.transactions.forEach(t => {
-                    report += `\t\t${t.name} : ${t.amt}\n`;
+                    report += `\t${t.name} : ${t.amt}\n`;
                 });
                 report += `\n\tEnding Balance: $${page.ending_balance}\n\n`
             }
