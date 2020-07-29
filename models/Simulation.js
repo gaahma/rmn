@@ -17,10 +17,12 @@ class Simulation {
     run(){
         const {calendar, ledger, timeline, rules} = this;
         timeline.forEach(date => {
+
             const day = calendar.get(date);
             rules.forEach(rule => {
                 if(rule.matches(day)){
                     const applicable_date = calendar.get_applicable_date(day, rule);
+                    console.log(applicable_date)
                     ledger.write(applicable_date, rule.transaction);
                 }
             });

@@ -6,7 +6,6 @@ class Rule_Set {
         this.identification_rules = params.identification_rules;
         this.application_rules = params.application_rules;
         this.exclusions = params.exclusions;
-
         this.validate();
         this.class_properties();
     }
@@ -27,7 +26,7 @@ class Rule_Set {
         this.rule_funcs = {
             //{type: 'simple', property: 'date', flags: [17]}
             simple: function(rule, day){
-                return rule.flags.includes(day.get(rule.property));
+                return rule.flags.includes(day.get(rule.prop));
             },
             //{type: 'interval', interval: 2, unit: 'weeks', start_date: '2018-11-03'}
             interval: function(rule, day){

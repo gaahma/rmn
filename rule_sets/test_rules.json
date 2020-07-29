@@ -1,0 +1,51 @@
+[
+    {
+        "transaction": {
+            "name": "Paycheck",
+            "amt": 300
+        },
+        "identification_rules": [
+            {
+                "type": "simple",
+                "prop": "day",
+                "flags": [
+                    "Fri"
+                ]
+            }
+        ],
+        "application_rules": {
+            "bd_direction": "prev"
+        }
+    },
+    {
+        "transaction": {
+            "name": "Spotify",
+            "amt": -11
+        },
+        "identification_rules": [
+            {
+                "type": "simple",
+                "prop": "date",
+                "flags": [
+                    28
+                ]
+            }
+        ],
+        "application_rules": {
+            "bd_direction": "next"
+        }
+    },
+    {
+        "transaction": {
+            "name": "Eat Out",
+            "amt": -40
+        },
+    
+        "identification_rules": [
+            { "type": "simple", "prop": "day", "flags": ["Tue", "Thu", "Sat"]}
+        ],
+        "application_rules": {
+            "bd_direction": null
+        }
+    }
+]

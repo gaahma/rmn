@@ -19,7 +19,6 @@ class Ledger {
     }
     calculate(balance, timeline){
         timeline.forEach(date => {
-            // console.log('caculating');
             let page = this.get(date);
             page.starting_balance = balance;
             page.transactions.forEach(t => {
